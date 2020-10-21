@@ -45,6 +45,7 @@ public class Game extends JFrame {
         setSize(350,200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //test
     }
 
     MouseAdapter ma = new MouseAdapter() {
