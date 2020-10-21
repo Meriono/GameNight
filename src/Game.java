@@ -51,6 +51,11 @@ public class Game extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
+            for (JButton jb : gameList) {
+                if(e.getSource() == jb){
+                    System.out.println("Du klickade på knapp: " + (gameList.indexOf(jb)+1));
+                }
+            }
         }
     };
 
