@@ -16,6 +16,7 @@ public class Game extends JFrame {
     JPanel gridPanel = new JPanel();
     JButton newGameButton = new JButton("Nytt spel");
     List<JButton> gameList = new ArrayList<>();
+    JLabel blank = new JLabel("BLANK");
 
     Game(){
         for (int i = 1; i < 16; i++) {
@@ -41,6 +42,7 @@ public class Game extends JFrame {
         panel.add(gridPanel, BorderLayout.WEST);
         panel.add(newGameButton, BorderLayout.EAST);
         newGameButton.addMouseListener(ma);
+        gridPanel.add(blank);
 
         setVisible(true);
         setSize(350,200);
@@ -53,10 +55,9 @@ public class Game extends JFrame {
         public void mouseClicked(MouseEvent e) {
             for (JButton jb : gameList) {
                 if(e.getSource() == jb){
-                    System.out.println("Du klickade på knapp: " + (gameList.indexOf(jb)+1));
-                    System.out.println(jb.getLocation());
-                    jb.setLocation(147,121);
-
+                    Point p = new Point(jb.getLocation());
+                    jb.setLocation(blank.getLocation());
+                    blank.setLocation(p);
                 }
             }
             if(e.getSource() == newGameButton){
@@ -69,3 +70,11 @@ public class Game extends JFrame {
         Game start = new Game();
     }
 }
+
+
+/* Location på brickorna
+0-1	    49-1	98-1 	147-1
+0-41	49-41	98-41	147-41
+0-81	49-81	98-81	147-81
+0-121	49-121	98-121	147-121
+ */
