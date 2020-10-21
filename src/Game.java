@@ -40,6 +40,7 @@ public class Game extends JFrame {
         add(panel);
         panel.add(gridPanel, BorderLayout.WEST);
         panel.add(newGameButton, BorderLayout.EAST);
+        newGameButton.addMouseListener(ma);
 
         setVisible(true);
         setSize(350,200);
@@ -50,11 +51,16 @@ public class Game extends JFrame {
     MouseAdapter ma = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            super.mouseClicked(e);
             for (JButton jb : gameList) {
                 if(e.getSource() == jb){
                     System.out.println("Du klickade på knapp: " + (gameList.indexOf(jb)+1));
+                    System.out.println(jb.getLocation());
+                    jb.setLocation(147,121);
+
                 }
+            }
+            if(e.getSource() == newGameButton){
+                Game newStart = new Game();
             }
         }
     };
