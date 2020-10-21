@@ -25,6 +25,10 @@ public class Game extends JFrame {
             gridPanel.add(button);
             button.setBackground(Color.gray);
             button.setForeground(Color.darkGray);
+            /*
+            Källa till ändringen av border färgen:
+            https://stackoverflow.com/questions/56157666/change-border-color-of-a-jbutton-in-java-swing-preserving-the-insets
+             */
             button.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(Color.black, 1),
                     BorderFactory.createEmptyBorder(
@@ -48,7 +52,6 @@ public class Game extends JFrame {
         setSize(350,200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //test
     }
 
     MouseAdapter ma = new MouseAdapter() {
