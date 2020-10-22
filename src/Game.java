@@ -3,7 +3,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Hanna Edlund
@@ -18,13 +20,16 @@ public class Game extends JFrame {
     List<JButton> gameList = new ArrayList<>();
     JLabel blank = new JLabel("BLANK");
 
-    Game(){
+
+    public void createButtons(){
         for (int i = 1; i < 16; i++) {
-            JButton button = new JButton(String.valueOf(i));
-            gameList.add(button);
+            JButton button = new JButton();
+
+            gameList.add(sortButton(button, gameList));
             gridPanel.add(button);
             button.setBackground(Color.gray);
             button.setForeground(Color.darkGray);
+
             /*
             Källa till ändringen av border färgen:
             https://stackoverflow.com/questions/56157666/change-border-color-of-a-jbutton-in-java-swing-preserving-the-insets
@@ -39,6 +44,16 @@ public class Game extends JFrame {
             button.setSize(10,10);
             button.addMouseListener(ma);
         }
+    }
+    public JButton sortButton(JButton button, List<JButton> listOfButtons){
+        Random r = new Random();
+        int number = r.nextInt(15)+1;
+        return button;
+    }
+
+    Game(){
+        createButtons();
+
         setTitle("GameNight!");
         gridPanel.setLayout(new GridLayout(4,4));
         panel.setLayout(new BorderLayout());
@@ -46,6 +61,7 @@ public class Game extends JFrame {
         panel.add(gridPanel, BorderLayout.WEST);
         panel.add(newGameButton, BorderLayout.EAST);
         newGameButton.addMouseListener(ma);
+
         gridPanel.add(blank);
 
         setVisible(true);
@@ -57,6 +73,7 @@ public class Game extends JFrame {
     MouseAdapter ma = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+
             for (JButton jb : gameList) {
                 if(e.getSource() == jb){
                     Point p = new Point(jb.getLocation());
