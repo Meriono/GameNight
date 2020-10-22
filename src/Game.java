@@ -19,13 +19,14 @@ public class Game extends JFrame {
     JButton newGameButton = new JButton("Nytt spel");
     List<JButton> gameList = new ArrayList<>();
     JLabel blank = new JLabel("BLANK");
+    List<Integer> listOfNumbers = new ArrayList<>(15);
 
 
     public void createButtons(){
         for (int i = 1; i < 16; i++) {
             JButton button = new JButton();
 
-            gameList.add(sortButton(button, gameList));
+            gameList.add(sortButton(button));
             gridPanel.add(button);
             button.setBackground(Color.gray);
             button.setForeground(Color.darkGray);
@@ -45,9 +46,18 @@ public class Game extends JFrame {
             button.addMouseListener(ma);
         }
     }
-    public JButton sortButton(JButton button, List<JButton> listOfButtons){
+
+    public JButton sortButton(JButton button){
         Random r = new Random();
-        int number = r.nextInt(15)+1;
+
+        while (true){
+            int number = r.nextInt(15)+1;
+            if(!listOfNumbers.contains(number)){
+                button.setText(String.valueOf(number));
+                listOfNumbers.add(number);
+                break;
+            }
+        }
         return button;
     }
 
