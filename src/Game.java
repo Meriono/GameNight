@@ -17,6 +17,7 @@ public class Game extends JFrame {
     JPanel panel = new JPanel();
     JPanel gridPanel = new JPanel();
     JButton newGameButton = new JButton("Nytt spel");
+    JButton winTheGameButton = new JButton("Vinn spelet");
     List<JButton> gameList = new ArrayList<>();
     JLabel blank = new JLabel("BLANK");
     List<Integer> listOfNumbers = new ArrayList<>(15);
@@ -26,7 +27,7 @@ public class Game extends JFrame {
         for (int i = 1; i < 16; i++) {
             JButton button = new JButton();
 
-            gameList.add(sortButton(button));
+            gameList.add(randomButton(button));
             gridPanel.add(button);
             button.setBackground(Color.gray);
             button.setForeground(Color.darkGray);
@@ -47,7 +48,7 @@ public class Game extends JFrame {
         }
     }
 
-    public JButton sortButton(JButton button){
+    public JButton randomButton(JButton button){
         Random r = new Random();
 
         while (true){
@@ -67,10 +68,16 @@ public class Game extends JFrame {
         setTitle("GameNight!");
         gridPanel.setLayout(new GridLayout(4,4));
         panel.setLayout(new BorderLayout());
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new GridLayout(2,1));
         add(panel);
         panel.add(gridPanel, BorderLayout.WEST);
-        panel.add(newGameButton, BorderLayout.EAST);
+        rightPanel.add(newGameButton);
+        rightPanel.add(winTheGameButton);
+        panel.add(rightPanel, BorderLayout.EAST);
+
         newGameButton.addMouseListener(ma);
+        winTheGameButton.addMouseListener(ma);
 
         gridPanel.add(blank);
 
@@ -80,21 +87,41 @@ public class Game extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    MouseAdapter ma = new MouseAdapter() {
+    final MouseAdapter ma = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
 
             for (JButton jb : gameList) {
-                if(e.getSource() == jb){
+                if (e.getSource() == jb) {
                     Point p = new Point(jb.getLocation());
                     jb.setLocation(blank.getLocation());
                     blank.setLocation(p);
                 }
             }
-            if(e.getSource() == newGameButton){
+            if (e.getSource() == newGameButton) {
                 Game newStart = new Game();
             }
-        }
+            if (e.getSource() == winTheGameButton) {
+                //for (int i = 0; i < 15; i++) {
+
+
+                for (int i = 0; i < 14; i++) {
+                    int y = i+1;
+                    int firstNumber = Integer.parseInt(gameList.get(i).getText());
+                    int secondNumber = Integer.parseInt(gameList.get((y)).getText());
+
+                    if (firstNumber > secondNumber){
+                        Collections.swap(gameList, i, y);
+                        Point first = new Point(gameList.get(i).getLocation());
+                        gameList.get(i).setLocation(gameList.get(y).getLocation());
+                        gameList.get(y).setLocation(first);
+                    }
+                }
+
+
+                }
+            }
+        //}
     };
 
     public static void main(String[] args) {
