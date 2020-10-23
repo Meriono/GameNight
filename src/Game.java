@@ -19,7 +19,7 @@ public class Game extends JFrame {
     JButton newGameButton = new JButton("Nytt spel");
     JButton winTheGameButton = new JButton("Vinn spelet");
     List<JButton> gameList = new ArrayList<>();
-    JLabel blank = new JLabel("BLANK");
+    JButton blank = new JButton();
     List<Integer> listOfNumbers = new ArrayList<>(15);
 
 
@@ -64,6 +64,12 @@ public class Game extends JFrame {
 
     Game(){
         createButtons();
+        gameList.add(blank);
+        blank.addMouseListener(ma);
+//        for (JButton jb: gameList             ) {
+//            System.out.println(jb.getText());
+//        }
+//        System.out.println("SLUT");
 
         setTitle("GameNight!");
         gridPanel.setLayout(new GridLayout(4,4));
@@ -82,7 +88,7 @@ public class Game extends JFrame {
         gridPanel.add(blank);
 
         setVisible(true);
-        setSize(350,200);
+        setSize(550,200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -91,19 +97,40 @@ public class Game extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
 
+            if(e.getSource() == blank){
+                System.out.println("Blank knapp i arrayplats: " + gameList.indexOf(blank));
+            }
+
             for (JButton jb : gameList) {
-                if (e.getSource() == jb) {
+                if (e.getSource() == jb){
+                    for (int i = 0; i < gameList.size(); i++) {
+
+                        if(jb == gameList.get(i) && (!jb.getText().equals(blank.getText()))){
+                            System.out.println("Tryck på vanlig knapp: " + i );
+
+                            System.out.println(gameList.indexOf(jb));
+                            System.out.println(gameList.indexOf(blank));
+                            Collections.swap(gameList, gameList.indexOf(blank), gameList.indexOf(jb));
+                            System.out.println("Ny plats för blank: " + gameList.indexOf(blank));
+                        }
+                    }
                     Point p = new Point(jb.getLocation());
                     jb.setLocation(blank.getLocation());
                     blank.setLocation(p);
                 }
             }
+
             if (e.getSource() == newGameButton) {
                 Game newStart = new Game();
             }
-            if (e.getSource() == winTheGameButton) {
-                //for (int i = 0; i < 15; i++) {
 
+            if (e.getSource() == winTheGameButton) {
+                Point lastPoint = new Point(147,121);
+                if(blank.getLocation().equals(lastPoint)){
+                    Point secondToLastPoint = new Point(gameList.get(14).getLocation());
+                    gameList.get(14).setLocation(lastPoint);
+                    blank.setLocation(secondToLastPoint);
+                }
 
                 for (int i = 0; i < 14; i++) {
                     int y = i+1;
@@ -117,11 +144,8 @@ public class Game extends JFrame {
                         gameList.get(y).setLocation(first);
                     }
                 }
-
-
-                }
             }
-        //}
+        }
     };
 
     public static void main(String[] args) {
