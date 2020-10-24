@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Hanna Elisabeth Edlund
+ * Created by Hanna Edlund
  * Date: 2020-10-21
  * Time: 19:45
  * Project: InlämningSprint3
@@ -181,4 +181,3 @@ public class Game extends JFrame {
         Game start = new Game();
     }
 }
-// Test
