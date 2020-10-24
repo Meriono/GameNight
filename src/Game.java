@@ -47,6 +47,21 @@ public class Game extends JFrame {
         }
     }
 
+    public void winTheGame(){
+        int winTheGame = 0;
+
+        for (int i = 0; i < gameList.size()-1; i++) {
+                if(gameList.get(i) != blank){
+                    int compair = Integer.parseInt(gameList.get(i).getText());
+                    if((gameList.indexOf(gameList.get(i))+1) == compair && gameList.size()-1 == gameList.indexOf(blank))
+                        winTheGame++;
+                }
+        }
+        if(winTheGame == gameList.size()-1){
+            JOptionPane.showMessageDialog(null, "Grattis, du vann!");
+        }
+    }
+
     public JButton randomButton(JButton button){
         Random r = new Random();
 
@@ -118,6 +133,7 @@ public class Game extends JFrame {
                                 blank.setLocation(p);
 
                                 test = true;
+                                winTheGame();
                             }
                         }
                         if (test)
