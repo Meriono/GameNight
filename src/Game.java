@@ -101,23 +101,31 @@ public class Game extends JFrame {
                 System.out.println("Blank knapp i arrayplats: " + gameList.indexOf(blank));
             }
 
+            //TODO: Snygga till?
+            boolean test = false;
             for (JButton jb : gameList) {
-                if (e.getSource() == jb){
+                if (e.getSource() == jb) {
                     for (int i = 0; i < gameList.size(); i++) {
 
-                        if(jb == gameList.get(i) && (!jb.getText().equals(blank.getText()))){
+                        if (jb == gameList.get(i) && jb != blank) {
                             System.out.println("Tryck på vanlig knapp: " + i );
 
                             System.out.println(gameList.indexOf(jb));
                             System.out.println(gameList.indexOf(blank));
                             Collections.swap(gameList, gameList.indexOf(blank), gameList.indexOf(jb));
                             System.out.println("Ny plats för blank: " + gameList.indexOf(blank));
+                            test = true;
                         }
+
+                        if (test)
+                            break;
                     }
                     Point p = new Point(jb.getLocation());
                     jb.setLocation(blank.getLocation());
                     blank.setLocation(p);
                 }
+                if (test)
+                    break;
             }
 
             if (e.getSource() == newGameButton) {
