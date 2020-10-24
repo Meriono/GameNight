@@ -22,7 +22,6 @@ public class Game extends JFrame {
     JButton blank = new JButton();
     List<Integer> listOfNumbers = new ArrayList<>(15);
 
-
     public void createButtons(){
         for (int i = 1; i < 16; i++) {
             JButton button = new JButton();
@@ -66,10 +65,6 @@ public class Game extends JFrame {
         createButtons();
         gameList.add(blank);
         blank.addMouseListener(ma);
-//        for (JButton jb: gameList             ) {
-//            System.out.println(jb.getText());
-//        }
-//        System.out.println("SLUT");
 
         setTitle("GameNight!");
         gridPanel.setLayout(new GridLayout(4,4));
@@ -170,11 +165,3 @@ public class Game extends JFrame {
         Game start = new Game();
     }
 }
-
-
-/* Location på brickorna
-0-1	    49-1	98-1 	147-1
-0-41	49-41	98-41	147-41
-0-81	49-81	98-81	147-81
-0-121	49-121	98-121	147-121
- */
