@@ -108,21 +108,24 @@ public class Game extends JFrame {
                     for (int i = 0; i < gameList.size(); i++) {
 
                         if (jb == gameList.get(i) && jb != blank) {
-                            System.out.println("Tryck på vanlig knapp: " + i );
+                            int left = gameList.indexOf(blank)-1;
+                            int right = gameList.indexOf(blank)+1;
+                            int top = gameList.indexOf(blank)-4;
+                            int bottom = gameList.indexOf(blank)+4;
 
-                            System.out.println(gameList.indexOf(jb));
-                            System.out.println(gameList.indexOf(blank));
-                            Collections.swap(gameList, gameList.indexOf(blank), gameList.indexOf(jb));
-                            System.out.println("Ny plats för blank: " + gameList.indexOf(blank));
-                            test = true;
+                            if(i == left || i == right || i == top || i==bottom){
+                                Collections.swap(gameList, gameList.indexOf(blank), gameList.indexOf(jb));
+
+                                Point p = new Point(jb.getLocation());
+                                jb.setLocation(blank.getLocation());
+                                blank.setLocation(p);
+
+                                test = true;
+                            }
                         }
-
                         if (test)
                             break;
                     }
-                    Point p = new Point(jb.getLocation());
-                    jb.setLocation(blank.getLocation());
-                    blank.setLocation(p);
                 }
                 if (test)
                     break;
