@@ -47,6 +47,10 @@ public class Game extends JFrame {
         }
     }
 
+    public void winTheGame(){
+
+    }
+
     public JButton randomButton(JButton button){
         Random r = new Random();
 
