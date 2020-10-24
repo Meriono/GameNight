@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Hanna Edlund
+ * Created by Hanna Elisabeth Edlund
  * Date: 2020-10-21
  * Time: 19:45
  * Project: InlämningSprint3
