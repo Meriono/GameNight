@@ -107,10 +107,6 @@ public class Game extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            if(e.getSource() == blank){
-                winTheGame();
-            }
-
             //TODO: Snygga till?
             boolean test = false;
             for (JButton jb : gameList) {
@@ -137,6 +133,7 @@ public class Game extends JFrame {
                                 blank.setLocation(p);
 
                                 test = true;
+                                winTheGame();
                             }
                         }
                         if (test)
