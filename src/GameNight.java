@@ -1,19 +1,17 @@
-import javax.swing.*;
-
 /**
  * Created by Hanna Elisabeth Edlund
  * Date: 2020-10-21
  * Time: 19:45
  * Project: InlämningSprint3
  */
-public class Game {
+public class GameNight {
 
-    Game(){
-        Buttons starting = new Buttons();
+    GameNight(){
+        TheGame newButtons = new TheGame();
     }
 
     public static void main(String[] args) {
-        Game start = new Game();
+        GameNight start = new GameNight();
     }
 }
 // Test
