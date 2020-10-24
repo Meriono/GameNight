@@ -88,7 +88,7 @@ public class Game extends JFrame {
         gridPanel.add(blank);
 
         setVisible(true);
-        setSize(550,200);
+        setSize(400,200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -96,10 +96,6 @@ public class Game extends JFrame {
     final MouseAdapter ma = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-
-            if(e.getSource() == blank){
-                System.out.println("Blank knapp i arrayplats: " + gameList.indexOf(blank));
-            }
 
             //TODO: Snygga till?
             boolean test = false;
@@ -114,8 +110,14 @@ public class Game extends JFrame {
                             int bottom = gameList.indexOf(blank)+4;
 
                             if(i == left || i == right || i == top || i==bottom){
+                                /*
+                                Källa för att byta plats på två objekt i en lista:
+                                https://howtodoinjava.com/java/collections/arraylist/swap-two-elements-arraylist/
+                                 */
+                                //Byter plats på två knappar i listan
                                 Collections.swap(gameList, gameList.indexOf(blank), gameList.indexOf(jb));
 
+                                //Byter plats på tryckt knapp med blank i spelet
                                 Point p = new Point(jb.getLocation());
                                 jb.setLocation(blank.getLocation());
                                 blank.setLocation(p);
@@ -136,23 +138,28 @@ public class Game extends JFrame {
             }
 
             if (e.getSource() == winTheGameButton) {
-                Point lastPoint = new Point(147,121);
-                if(blank.getLocation().equals(lastPoint)){
-                    Point secondToLastPoint = new Point(gameList.get(14).getLocation());
-                    gameList.get(14).setLocation(lastPoint);
-                    blank.setLocation(secondToLastPoint);
+                int last = gameList.size()-1;
+
+                if(gameList.indexOf(blank) != last){
+                    Collections.swap(gameList, gameList.indexOf(blank), gameList.indexOf(gameList.get(last)));
+
+                    Point p = new Point(gameList.get(last).getLocation());
+                    gameList.get(last).setLocation(blank.getLocation());
+                    blank.setLocation(p);
                 }
 
-                for (int i = 0; i < 14; i++) {
-                    int y = i+1;
-                    int firstNumber = Integer.parseInt(gameList.get(i).getText());
-                    int secondNumber = Integer.parseInt(gameList.get((y)).getText());
+                for (int j = 0; j < gameList.size(); j++) {
+                    for (int i = 0; i < 14; i++) {
+                        int y = i+1;
+                        int firstNumber = Integer.parseInt(gameList.get(i).getText());
+                        int secondNumber = Integer.parseInt(gameList.get((y)).getText());
 
-                    if (firstNumber > secondNumber){
-                        Collections.swap(gameList, i, y);
-                        Point first = new Point(gameList.get(i).getLocation());
-                        gameList.get(i).setLocation(gameList.get(y).getLocation());
-                        gameList.get(y).setLocation(first);
+                        if (firstNumber > secondNumber){
+                            Collections.swap(gameList, i, y);
+                            Point first = new Point(gameList.get(i).getLocation());
+                            gameList.get(i).setLocation(gameList.get(y).getLocation());
+                            gameList.get(y).setLocation(first);
+                        }
                     }
                 }
             }
