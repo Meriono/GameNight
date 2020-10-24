@@ -48,7 +48,18 @@ public class Game extends JFrame {
     }
 
     public void winTheGame(){
+        int winTheGame = 0;
 
+        for (int i = 0; i < gameList.size()-1; i++) {
+                if(gameList.get(i) != blank){
+                    int compair = Integer.parseInt(gameList.get(i).getText());
+                    if((gameList.indexOf(gameList.get(i))+1) == compair && gameList.size()-1 == gameList.indexOf(blank))
+                        winTheGame++;
+                }
+        }
+        if(winTheGame == gameList.size()-1){
+            JOptionPane.showMessageDialog(null, "Grattis, du vann!");
+        }
     }
 
     public JButton randomButton(JButton button){
@@ -95,6 +106,10 @@ public class Game extends JFrame {
     final MouseAdapter ma = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+
+            if(e.getSource() == blank){
+                winTheGame();
+            }
 
             //TODO: Snygga till?
             boolean test = false;
