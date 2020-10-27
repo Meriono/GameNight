@@ -150,7 +150,7 @@ public class TheGame extends JFrame {
                     break;
             }
 
-            //Om man klickar på nytt spel-knappen
+            //Om man klickar på Nytt spel-knappen
             if (e.getSource() == newGameButton) {
                 setVisible(false);
                 new TheGame();
